@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>LightBridge Frame Scanner</title>
+<script src="https://unpkg.com/html5-qrcode" defer></script>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--text:#111827;--muted:#667085;--line:#e5e7eb;--accent:#111827;}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:720px;margin:auto;padding:18px} h1{font-size:24px;margin:6px 0} .sub{color:var(--muted);margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0}
+button,input{font:inherit} button{min-height:48px;border:0;border-radius:12px;padding:0 16px;font-weight:700;cursor:pointer}
+.primary{background:var(--accent);color:white;width:100%} .secondary{background:#eef0f3;color:#111827;width:100%}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} #reader{width:100%;overflow:hidden;border-radius:14px}
+.lookup{display:flex;gap:8px} .lookup input{width:100%;min-height:48px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-size:16px}
+.lookup button{background:#eef0f3} .hidden{display:none} .brand{font-size:14px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.model{font-size:22px;font-weight:800;margin:4px 0 10px} .pill{display:inline-block;background:#eef0f3;border-radius:999px;padding:6px 10px;font-size:13px;margin-right:6px}
+.pricegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px} .metric{background:#f8fafc;border-radius:14px;padding:13px}
+.label{font-size:12px;color:var(--muted)} .value{font-size:20px;font-weight:800;margin-top:3px} .msrp{font-size:38px;font-weight:900;margin:3px 0}
+.ok{color:#067647} .bad{color:#b42318} #msg{font-size:14px;margin-top:10px}
+.small{font-size:12px;color:var(--muted);line-height:1.45} table{width:100%;border-collapse:collapse;font-size:13px} th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line)} th{color:var(--muted)}
+@media(max-width:480px){.row,.pricegrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Frame Price Scanner</h1>
+  <div class="sub">Private inventory tool • 75 Safilo items loaded</div>
+
+  <div class="card">
+    <button id="start" class="primary">Scan Barcode</button>
+    <div id="readerWrap" class="hidden" style="margin-top:12px"><div id="reader"></div></div>
+    <div id="msg" class="small">Camera scanning requires HTTPS and camera permission.</div>
+  </div>
+
+  <div class="card">
+    <div class="label" style="margin-bottom:7px">OR ENTER / PASTE CODE</div>
+    <div class="lookup">
+      <input id="manual" inputmode="text" autocomplete="off" placeholder="Scan or enter barcode / item code">
+      <button id="find">Find</button>
+    </div>
+  </div>
+
+  <div id="result" class="card hidden">
+    <div id="brand" class="brand"></div>
+    <div id="model" class="model"></div>
+    <div><span id="category" class="pill"></span><span id="code" class="pill"></span></div>
+    <div class="pricegrid">
+      <div class="metric"><div class="label">UNIT PRICE</div><div id="cost" class="value"></div></div>
+      <div class="metric"><div class="label">MARKUP</div><div id="mult" class="value"></div></div>
+    </div>
+    <div class="metric" style="margin-top:10px">
+      <div class="label">CALCULATED MSRP</div>
+      <div id="msrp" class="msrp"></div>
+      <div id="formula" class="small"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <button id="showInv" class="secondary">View Inventory</button>
+      <button id="download" class="secondary">Export CSV</button>
+    </div>
+    <div id="inv" class="hidden" style="overflow:auto;margin-top:12px"></div>
+  </div>
+  <div class="small">Pricing rule: Eyeglass Frames × 3.00 • Sunglasses × 2.75. This first version matches scanned values against the item Code field in your current inventory.</div>
+</div>
+
+<script>
+const INVENTORY=[{"code":"110412IPR5316","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"ADRIE/3 | IPR | 53/16","unitPrice":93.95,"multiplier":3.0,"msrp":281.85,"status":"Active"},{"code":"110413QFO5215","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"BRONWEN/3 | QFO | 52/15","unitPrice":93.95,"multiplier":3.0,"msrp":281.85,"status":"Active"},{"code":"111911HKZ5415","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"CELESTINE/F | HKZ | 54/15","unitPrice":86.95,"multiplier":3.0,"msrp":260.85,"status":"Active"},{"code":"1084931ED5516","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"JERI/F | 1ED | 55/16","unitPrice":95.95,"multiplier":3.0,"msrp":287.85,"status":"Active"},{"code":"107825C9A5414","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KATTALIN/F | C9A | 54/14","unitPrice":95.95,"multiplier":3.0,"msrp":287.85,"status":"Active"},{"code":"111893DS15216","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS ADRIA 2 | D51 | 52/16","unitPrice":74.95,"multiplier":3.0,"msrp":224.85,"status":"Active"},{"code":"109838B3V5016","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS AYLIN 2/G/T | B3V | 50/16","unitPrice":104.0,"multiplier":3.0,"msrp":312.0,"status":"Active"},{"code":"1118953DV5536","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS DEMI 2 | 3DV | 55/36","unitPrice":82.95,"multiplier":3.0,"msrp":248.85,"status":"Active"},{"code":"111895PJP5316","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS DEMI 2 | PJP | 53/16","unitPrice":82.95,"multiplier":3.0,"msrp":248.85,"status":"Active"},{"code":"11189809Q5638","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS GENE 2/G | 09Q | 56/38","unitPrice":78.95,"multiplier":3.0,"msrp":236.85,"status":"Active"},{"code":"110309KB75218","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS HERMIONE 2 | KB7 | 52/18","unitPrice":96.0,"multiplier":3.0,"msrp":288.0,"status":"Active"},{"code":"1129627ZJ5017","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS JACKELINE2US | 7ZJ | 50/17","unitPrice":91.95,"multiplier":3.0,"msrp":275.85,"status":"Active"},{"code":"10983597M5316","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS JAILYN 2/G | 97M | 53/16","unitPrice":93.95,"multiplier":3.0,"msrp":281.85,"status":"Active"},{"code":"1098328075217","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS JALINDA 2 | 807 | 52/17","unitPrice":78.0,"multiplier":3.0,"msrp":234.0,"status":"Active"},{"code":"1103077RM5537","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS KARIANE 2 | 7RM | 55/37","unitPrice":87.95,"multiplier":3.0,"msrp":263.85,"status":"Active"},{"code":"112412S9W5316","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS KARLY 2 | S9W | 53/16","unitPrice":74.95,"multiplier":3.0,"msrp":224.85,"status":"Active"},{"code":"11189909Q5117","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS LYSSA 2/G | 09Q | 51/17","unitPrice":82.95,"multiplier":3.0,"msrp":248.85,"status":"Active"},{"code":"1124180B24816","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS MARIKA 2 | 0B2 | 48/16","unitPrice":62.0,"multiplier":3.0,"msrp":186.0,"status":"Active"},{"code":"111900P6J5317","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS MISA 2/G | P6J | 53/17","unitPrice":94.95,"multiplier":3.0,"msrp":284.85,"status":"Active"},{"code":"1124158075217","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS RAGAN 2/C2 | 807 | 52/17","unitPrice":122.0,"multiplier":3.0,"msrp":366.0,"status":"Active"},{"code":"1103053JS5517","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS REILLY 2 | 35J | 55/17","unitPrice":78.0,"multiplier":3.0,"msrp":234.0,"status":"Active"},{"code":"1124161414814","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"KS TANYA 2 | 141 | 48/14","unitPrice":60.0,"multiplier":3.0,"msrp":180.0,"status":"Active"},{"code":"1084790864916","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"POSI | 086 | 49/16","unitPrice":98.95,"multiplier":3.0,"msrp":296.85,"status":"Active"},{"code":"1119128075316","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Kate Spade","model":"POSI/F | 807 | 53/16","unitPrice":86.95,"multiplier":3.0,"msrp":260.85,"status":"Active"},{"code":"1031131ED5417","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 1737/F | 1ED | 54/17","unitPrice":76.95,"multiplier":3.0,"msrp":230.85,"status":"Active"},{"code":"1037220035517","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 1785 | 003 | 55/17","unitPrice":72.95,"multiplier":3.0,"msrp":218.85,"status":"Active"},{"code":"103722FLL5517","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 1785 | FLL | 55/17","unitPrice":72.95,"multiplier":3.0,"msrp":218.85,"status":"Active"},{"code":"1071850035216","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2025 | 003 | 52/16","unitPrice":53.95,"multiplier":3.0,"msrp":161.85,"status":"Active"},{"code":"10718509Q5216","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2025 | 09Q | 52/16","unitPrice":53.95,"multiplier":3.0,"msrp":161.85,"status":"Active"},{"code":"107528T176059","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2041 | T17 | 60/59","unitPrice":76.95,"multiplier":3.0,"msrp":230.85,"status":"Active"},{"code":"108113KB75419","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2075 | KB7 | 54/19","unitPrice":72.95,"multiplier":3.0,"msrp":218.85,"status":"Active"},{"code":"1081121ED5517","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2076 | 1ED | 55/17","unitPrice":72.95,"multiplier":3.0,"msrp":218.85,"status":"Active"},{"code":"1081128075517","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2076 | 807 | 55/17","unitPrice":72.95,"multiplier":3.0,"msrp":218.85,"status":"Active"},{"code":"108529PJP5115","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2122 | PJP | 51/15","unitPrice":55.95,"multiplier":3.0,"msrp":167.85,"status":"Active"},{"code":"108889R804821","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2140 | R80 | 48/21","unitPrice":91.95,"multiplier":3.0,"msrp":275.85,"status":"Active"},{"code":"20737808A55M9","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2145/CS | 08A | 55/M9","unitPrice":85.95,"multiplier":3.0,"msrp":257.85,"status":"Active"},{"code":"1088228075220","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2147 | 807 | 52/20","unitPrice":76.95,"multiplier":3.0,"msrp":230.85,"status":"Active"},{"code":"10882308A5538","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2148 | 08A | 55/38","unitPrice":72.95,"multiplier":3.0,"msrp":218.85,"status":"Active"},{"code":"108994R815318","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2169 | R81 | 53/18","unitPrice":87.95,"multiplier":3.0,"msrp":263.85,"status":"Active"},{"code":"10901808A5016","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2171 | 08A | 50/16","unitPrice":85.95,"multiplier":3.0,"msrp":257.85,"status":"Active"},{"code":"109018PJP5236","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2171 | PJP | 52/36","unitPrice":85.95,"multiplier":3.0,"msrp":257.85,"status":"Active"},{"code":"109016AOZ4820","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2172 | AOZ | 48/20","unitPrice":87.95,"multiplier":3.0,"msrp":263.85,"status":"Active"},{"code":"109714KB74916","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2247 | KB7 | 49/16","unitPrice":46.0,"multiplier":3.0,"msrp":138.0,"status":"Active"},{"code":"109716AOZ5217","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2248 | AOZ | 52/17","unitPrice":82.5,"multiplier":3.0,"msrp":247.5,"status":"Active"},{"code":"109716R805217","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2248 | R80 | 52/17","unitPrice":82.5,"multiplier":3.0,"msrp":247.5,"status":"Active"},{"code":"1100380035817","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2278 | 003 | 58/17","unitPrice":76.0,"multiplier":3.0,"msrp":228.0,"status":"Active"},{"code":"110038R805817","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2278 | R80 | 58/17","unitPrice":76.0,"multiplier":3.0,"msrp":228.0,"status":"Active"},{"code":"11003908A5616","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2279 | 08A | 56/16","unitPrice":72.0,"multiplier":3.0,"msrp":216.0,"status":"Active"},{"code":"1100391ED5816","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2279 | 1ED | 58/16","unitPrice":72.0,"multiplier":3.0,"msrp":216.0,"status":"Active"},{"code":"111932EX45118","category":"Eyeglass Frame","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2373 | EX4 | 51/18","unitPrice":76.95,"multiplier":3.0,"msrp":230.85,"status":"Active"},{"code":"2080875MU55HA","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"AMBERLEE/F/S | 5MU | 55/HA","unitPrice":90.0,"multiplier":2.75,"msrp":247.5,"status":"Active"},{"code":"208915X195290","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"CAMRYN/F/S | X19 | 52/90","unitPrice":78.0,"multiplier":2.75,"msrp":214.5,"status":"Active"},{"code":"20904408650HA","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"CAMRYN/S/US | 086 | 50/HA","unitPrice":90.0,"multiplier":2.75,"msrp":247.5,"status":"Active"},{"code":"1120818075218","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"HERMIONE/G/US | 807 | 52/18","unitPrice":91.95,"multiplier":2.75,"msrp":252.86,"status":"Active"},{"code":"1120957HH4917","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"JOLIET/US | 7HH | 49/17","unitPrice":91.95,"multiplier":2.75,"msrp":252.86,"status":"Active"},{"code":"2089048075390","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS AILEY 2/G/S | 807 | 53/90","unitPrice":69.0,"multiplier":2.75,"msrp":189.75,"status":"Active"},{"code":"208906INA55WJ","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS AMAYA 2/G/S | INA | 55/WJ","unitPrice":95.0,"multiplier":2.75,"msrp":261.25,"status":"Active"},{"code":"208907086533X","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS BERYL 2/G/S | 086 | 53/3X","unitPrice":71.0,"multiplier":2.75,"msrp":195.25,"status":"Active"},{"code":"112147CUA5218","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS CAROLAN2G/US | CUA | 52/18","unitPrice":91.95,"multiplier":2.75,"msrp":252.86,"status":"Active"},{"code":"2080898075590","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS JACEY 2/G/S | 807 | 55/90","unitPrice":90.0,"multiplier":2.75,"msrp":247.5,"status":"Active"},{"code":"20816480751M9","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS JENELL 2/S | 807 | 51/M9","unitPrice":95.0,"multiplier":2.75,"msrp":261.25,"status":"Active"},{"code":"2084387RM5790","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS LAYNE 2/G/S | 7RM | 57/90","unitPrice":82.0,"multiplier":2.75,"msrp":225.5,"status":"Active"},{"code":"209318LKS6090","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS MELLY 2/G/S | LKS | 60/90","unitPrice":62.0,"multiplier":2.75,"msrp":170.5,"status":"Active"},{"code":"20932008655SP","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"KS TAYLA 2/S | 086 | 55/SP","unitPrice":77.0,"multiplier":2.75,"msrp":211.75,"status":"Active"},{"code":"206543HR355PR","category":"Sunglasses","manufacturer":"Safilo","brand":"Kate Spade","model":"MARLOWE/G/S | HR3 | 55/PR","unitPrice":90.0,"multiplier":2.75,"msrp":247.5,"status":"Active"},{"code":"1120770035838","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 1918/US | 003 | 58/38","unitPrice":91.95,"multiplier":2.75,"msrp":252.86,"status":"Active"},{"code":"112077FLL5618","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 1918/US | FLL | 56/18","unitPrice":91.95,"multiplier":2.75,"msrp":252.86,"status":"Active"},{"code":"206288T1756M9","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2040/S | T17 | 56/M9","unitPrice":79.0,"multiplier":2.75,"msrp":217.25,"status":"Active"},{"code":"206751PJP5708","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2073/S | PJP | 57/08","unitPrice":68.0,"multiplier":2.75,"msrp":187.0,"status":"Active"},{"code":"206919FLL55VI","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2088/S | FLL | 55/VI","unitPrice":70.0,"multiplier":2.75,"msrp":192.5,"status":"Active"},{"code":"20756608648IR","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2126/S | 086 | 48/IR","unitPrice":79.0,"multiplier":2.75,"msrp":217.25,"status":"Active"},{"code":"20789480756M9","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2201/S | 807 | 56/M9","unitPrice":81.0,"multiplier":2.75,"msrp":222.75,"status":"Active"},{"code":"111929SUV5617","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2297/F/US | SUV | 56/17","unitPrice":85.0,"multiplier":2.75,"msrp":233.75,"status":"Active"},{"code":"20866080759IR","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2319/S | 807 | 59/IR","unitPrice":92.0,"multiplier":2.75,"msrp":253.0,"status":"Active"},{"code":"20868080756M9","category":"Sunglasses","manufacturer":"Safilo","brand":"Tommy Hilfiger","model":"TH 2324/S | 807 | 56/M9","unitPrice":88.0,"multiplier":2.75,"msrp":242.0,"status":"Active"}];
+const byCode=new Map(INVENTORY.map(x=>[String(x.code).trim(),x]));
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
+let scanner=null, scanning=false;
+
+function lookup(raw){
+  const key=String(raw||'').trim();
+  const item=byCode.get(key);
+  if(!item){
+    $('result').classList.add('hidden');
+    $('msg').innerHTML='<span class="bad">Not found:</span> '+escapeHtml(key)+' — the barcode may encode a different UPC/SKU than the packing-list Code.';
+    return false;
+  }
+  $('brand').textContent=item.brand;
+  $('model').textContent=item.model;
+  $('category').textContent=item.category;
+  $('code').textContent='Code: '+item.code;
+  $('cost').textContent=money(item.unitPrice);
+  $('mult').textContent=item.multiplier.toFixed(2)+'×';
+  $('msrp').textContent=money(item.msrp);
+  $('formula').textContent=money(item.unitPrice)+' × '+item.multiplier.toFixed(2)+' = '+money(item.msrp);
+  $('result').classList.remove('hidden');
+  $('msg').innerHTML='<span class="ok">Item found.</span>';
+  return true;
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+
+$('find').addEventListener('click',()=>lookup($('manual').value));
+$('manual').addEventListener('keydown',e=>{if(e.key==='Enter') lookup(e.target.value);});
+
+$('start').addEventListener('click',async()=>{
+  if(scanning){ try{await scanner.stop();}catch(e){} scanning=false; $('readerWrap').classList.add('hidden'); $('start').textContent='Scan Barcode'; return; }
+  if(typeof Html5Qrcode==='undefined'){ $('msg').textContent='Scanner library did not load. Check internet connection.'; return; }
+  $('readerWrap').classList.remove('hidden');
+  scanner=new Html5Qrcode('reader');
+  try{
+    await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:280,height:150},formatsToSupport:[
+      Html5QrcodeSupportedFormats.CODE_128,Html5QrcodeSupportedFormats.CODE_39,
+      Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,
+      Html5QrcodeSupportedFormats.UPC_A,Html5QrcodeSupportedFormats.UPC_E
+    ]}, async decoded=>{
+      $('manual').value=decoded;
+      lookup(decoded);
+      try{await scanner.stop();}catch(e){}
+      scanning=false; $('readerWrap').classList.add('hidden'); $('start').textContent='Scan Barcode';
+    }, ()=>{});
+    scanning=true; $('start').textContent='Stop Camera'; $('msg').textContent='Camera active — point it at the barcode.';
+  }catch(e){ $('msg').innerHTML='<span class="bad">Camera could not start.</span> Use HTTPS, allow camera access, or enter the code manually.'; $('readerWrap').classList.add('hidden'); }
+});
+
+$('showInv').addEventListener('click',()=>{
+ const box=$('inv'); if(!box.classList.contains('hidden')){box.classList.add('hidden');return;}
+ box.innerHTML='<table><thead><tr><th>Brand</th><th>Model</th><th>Type</th><th>MSRP</th></tr></thead><tbody>'+
+ INVENTORY.map(x=>`<tr><td>${escapeHtml(x.brand)}</td><td>${escapeHtml(x.model)}</td><td>${escapeHtml(x.category)}</td><td>${money(x.msrp)}</td></tr>`).join('')+'</tbody></table>';
+ box.classList.remove('hidden');
+});
+$('download').addEventListener('click',()=>{
+ const cols=['code','category','manufacturer','brand','model','unitPrice','multiplier','msrp','status'];
+ const csv=[cols.join(','),...INVENTORY.map(x=>cols.map(k=>'"'+String(x[k]??'').replaceAll('"','""')+'"').join(','))].join('\n');
+ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='frame-inventory.csv'; a.click(); URL.revokeObjectURL(a.href);
+});
+</script>
+</body></html>
