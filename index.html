@@ -1,85 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f172a">
-<title>LightBridge Frame Scanner</title>
-<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:760px;margin:auto;padding:16px 16px 40px}h1{font-size:25px;margin:4px 0}.sub{color:#64748b;margin:0 0 14px}.card{background:white;border:1px solid #e2e8f0;border-radius:18px;padding:15px;margin:11px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}button,input{font:inherit}button{border:0;border-radius:12px;min-height:48px;padding:0 15px;font-weight:750;cursor:pointer}.primary{background:#0f172a;color:#fff;width:100%}.secondary{background:#e2e8f0;color:#0f172a}.danger{background:#fee2e2;color:#991b1b}.row{display:flex;gap:8px}.row>*{flex:1}input{width:100%;height:48px;border:1px solid #cbd5e1;border-radius:12px;padding:0 12px;font-size:17px}.label{font-size:12px;color:#64748b;font-weight:700}.big{font-size:28px;font-weight:850;margin:4px 0}.brand{font-size:14px;font-weight:800;color:#475569;text-transform:uppercase}.pill{display:inline-block;background:#f1f5f9;border-radius:999px;padding:6px 9px;margin:4px 5px 0 0;font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.metric{background:#f8fafc;border-radius:13px;padding:11px}.metric .v{font-size:20px;font-weight:800;margin-top:3px}.ok{color:#047857}.bad{color:#b91c1c}.warn{color:#b45309}.hidden{display:none}#reader{overflow:hidden;border-radius:14px;margin-top:10px}.status{font-size:13px;color:#64748b;margin-top:8px}.scanitem{border-top:1px solid #e2e8f0;padding:10px 0}.scanitem:first-child{border-top:0}.scanhead{display:flex;justify-content:space-between;gap:8px}.tiny{font-size:12px;color:#64748b}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.toolbar{grid-template-columns:1fr}.row{flex-direction:column}}
-</style>
-</head>
-<body>
-<div class="wrap">
-<h1>LightBridge Frame Scanner</h1>
-<p class="sub"><span id="loaded">Loading inventory…</span></p>
-
-<div class="card">
-<button id="scanBtn" class="primary">📷 Scan Barcode</button>
-<div id="readerWrap" class="hidden"><div id="reader"></div></div>
-<div id="scanStatus" class="status">Use the number printed below the product barcode. Camera access requires HTTPS.</div>
-</div>
-
-<div class="card">
-<div class="label">MANUAL BARCODE LOOKUP</div>
-<div class="row" style="margin-top:7px"><input id="manual" inputmode="numeric" autocomplete="off" placeholder="Scan or type barcode"><button id="lookupBtn" class="secondary">Find</button></div>
-</div>
-
-<div id="result" class="card hidden">
-<div id="foundState" class="brand"></div>
-<div id="brand" class="brand"></div>
-<div id="model" class="big"></div>
-<div><span id="type" class="pill"></span><span id="color" class="pill"></span></div>
-<div class="grid">
-<div class="metric"><div class="label">UNIT COST</div><div id="cost" class="v">—</div></div>
-<div class="metric"><div class="label">MSRP</div><div id="msrp" class="v">—</div></div>
-<div class="metric"><div class="label">SCANNED</div><div id="qty" class="v">0</div></div>
-</div>
-<div id="barcodeLine" class="status"></div>
-<button id="addBtn" class="primary" style="margin-top:12px">Add to Physical Count</button>
-</div>
-
-<div class="card">
-<div class="scanhead"><div><div class="label">PHYSICAL COUNT</div><div class="big"><span id="totalScans">0</span> scans</div></div><div style="text-align:right"><div class="label">UNIQUE</div><div class="big" id="uniqueScans">0</div></div></div>
-<div id="recent" class="status">No frames scanned yet.</div>
-<div class="toolbar"><button id="exportBtn" class="secondary">⬇️ Export Count CSV</button><button id="clearBtn" class="danger">Clear Count</button></div>
-</div>
-</div>
-
-<script>
-const CSV_URL='data/lightbridge_safilo_inventory_with_frame_details.csv';
-let inventory=new Map(), current=null, scanner=null, running=false;
-let count=JSON.parse(localStorage.getItem('lb-frame-count')||'{}');
-
-function cleanBarcode(v){return String(v||'').replace(/[^0-9]/g,'').trim()}
-function parseCSV(text){
-  const rows=[];let row=[],field='',q=false;
-  for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(q){if(c==='"'&&n==='"'){field+='"';i++}else if(c==='"'){q=false}else field+=c}else{if(c==='"')q=true;else if(c===','){row.push(field);field=''}else if(c==='\n'){row.push(field.replace(/\r$/,''));rows.push(row);row=[];field=''}else field+=c}}
-  if(field||row.length){row.push(field);rows.push(row)}return rows;
-}
-async function loadInventory(){
- try{const r=await fetch(CSV_URL+'?v='+Date.now());if(!r.ok)throw new Error('CSV '+r.status);const text=await r.text();const rows=parseCSV(text);const h=rows.shift().map(x=>x.trim());
- const ix=n=>h.indexOf(n);for(const a of rows){const b=cleanBarcode(a[ix('Barcode Number')]);if(!b)continue;inventory.set(b,{barcode:b,brand:a[ix('Brand')]||'',model:a[ix('Frame Name')]||'',color:a[ix('Color')]||'',type:a[ix('Type')]||'',cost:a[ix('Unit Price')]||'',msrp:a[ix('MSRP Price')]||''})}
- document.getElementById('loaded').textContent=inventory.size+' inventory items loaded';
- }catch(e){document.getElementById('loaded').textContent='Inventory could not load';document.getElementById('loaded').className='bad';console.error(e)}
- renderCount();
-}
-function show(item,barcode){
- current=item||{barcode,brand:'',model:'Barcode not found',color:'',type:'',cost:'',msrp:''};const found=!!item;
- document.getElementById('result').classList.remove('hidden');document.getElementById('foundState').textContent=found?'✓ FOUND IN INVENTORY':'⚠ NOT FOUND IN INVENTORY';document.getElementById('foundState').className='brand '+(found?'ok':'bad');
- document.getElementById('brand').textContent=item?.brand||'';document.getElementById('model').textContent=item?.model||'Barcode not found';document.getElementById('type').textContent=item?.type||'Unknown item';document.getElementById('color').textContent=item?.color||'Color unavailable';document.getElementById('cost').textContent=item?.cost?'$'+Number(item.cost).toFixed(2):'—';document.getElementById('msrp').textContent=item?.msrp?'$'+Number(item.msrp).toFixed(2):'—';document.getElementById('qty').textContent=count[barcode]?.qty||0;document.getElementById('barcodeLine').textContent='Barcode: '+barcode;
- document.getElementById('addBtn').textContent=found?'Add to Physical Count':'Add Unknown Barcode';
-}
-function lookup(raw,autoAdd=false){const b=cleanBarcode(raw);if(!b)return;const item=inventory.get(b);show(item,b);document.getElementById('manual').value=b;if(autoAdd)addCurrent();}
-function addCurrent(){if(!current)return;const b=current.barcode;if(!count[b])count[b]={qty:0,brand:current.brand||'',model:current.model||'',color:current.color||'',type:current.type||'',cost:current.cost||'',msrp:current.msrp||''};count[b].qty++;localStorage.setItem('lb-frame-count',JSON.stringify(count));document.getElementById('qty').textContent=count[b].qty;renderCount();if(navigator.vibrate)navigator.vibrate(70)}
-function renderCount(){const entries=Object.entries(count);let total=0;entries.forEach(([,v])=>total+=Number(v.qty||0));document.getElementById('totalScans').textContent=total;document.getElementById('uniqueScans').textContent=entries.length;const r=document.getElementById('recent');if(!entries.length){r.innerHTML='No frames scanned yet.';return}r.innerHTML=entries.slice(-8).reverse().map(([b,v])=>`<div class="scanitem"><div class="scanhead"><b>${escapeHtml(v.brand+' '+v.model)||'Unknown barcode'}</b><b>× ${v.qty}</b></div><div class="tiny">${b}${v.color?' · '+escapeHtml(v.color):''}</div></div>`).join('')}
-function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-async function toggleScanner(){if(running){await stopScanner();return}document.getElementById('readerWrap').classList.remove('hidden');document.getElementById('scanBtn').textContent='Stop Camera';scanner=new Html5Qrcode('reader');try{await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:280,height:150}},decoded=>{lookup(decoded,true);document.getElementById('scanStatus').textContent='Scanned '+cleanBarcode(decoded)+' — added to count.'},()=>{});running=true}catch(e){document.getElementById('scanStatus').textContent='Camera could not start. Check Safari camera permission.';document.getElementById('scanStatus').className='status bad';document.getElementById('scanBtn').textContent='📷 Scan Barcode'}}
-async function stopScanner(){try{if(scanner)await scanner.stop()}catch(e){}running=false;document.getElementById('readerWrap').classList.add('hidden');document.getElementById('scanBtn').textContent='📷 Scan Barcode'}
-function exportCSV(){const head=['Barcode Number','Brand','Frame Name','Color','Type','Unit Price','MSRP Price','Physical Qty'];const lines=[head];for(const [b,v] of Object.entries(count))lines.push([b,v.brand,v.model,v.color,v.type,v.cost,v.msrp,v.qty]);const csv=lines.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='lightbridge_physical_count.csv';a.click();URL.revokeObjectURL(a.href)}
-
-document.getElementById('scanBtn').onclick=toggleScanner;document.getElementById('lookupBtn').onclick=()=>lookup(document.getElementById('manual').value);document.getElementById('manual').addEventListener('keydown',e=>{if(e.key==='Enter')lookup(e.target.value)});document.getElementById('addBtn').onclick=addCurrent;document.getElementById('exportBtn').onclick=exportCSV;document.getElementById('clearBtn').onclick=()=>{if(confirm('Clear the entire physical count?')){count={};localStorage.removeItem('lb-frame-count');renderCount();if(current)show(inventory.get(current.barcode),current.barcode)}};
-loadInventory();
-</script>
-</body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0f172a"><title>LightBridge Frame Scanner</title><script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script><style>*{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:760px;margin:auto;padding:16px 16px 40px}h1{font-size:25px;margin:4px 0}.sub{color:#64748b}.card{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:15px;margin:11px 0}button,input{font:inherit}button{border:0;border-radius:12px;min-height:48px;padding:0 15px;font-weight:750}.primary{background:#0f172a;color:#fff;width:100%}.secondary{background:#e2e8f0}.danger{background:#fee2e2;color:#991b1b}.row{display:flex;gap:8px}.row>*{flex:1}input{width:100%;height:48px;border:1px solid #cbd5e1;border-radius:12px;padding:0 12px;font-size:17px}.label{font-size:12px;color:#64748b;font-weight:700}.big{font-size:28px;font-weight:850;margin:4px 0}.brand{font-size:14px;font-weight:800;color:#475569;text-transform:uppercase}.pill{display:inline-block;background:#f1f5f9;border-radius:999px;padding:6px 9px;margin:4px 5px 0 0;font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.metric{background:#f8fafc;border-radius:13px;padding:11px}.metric .v{font-size:20px;font-weight:800;margin-top:3px}.ok{color:#047857}.bad{color:#b91c1c}.hidden{display:none}#reader{overflow:hidden;border-radius:14px;margin-top:10px}.status,.tiny{font-size:12px;color:#64748b;margin-top:8px}.scanitem{border-top:1px solid #e2e8f0;padding:10px 0}.scanhead{display:flex;justify-content:space-between;gap:8px}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.toolbar{grid-template-columns:1fr}.row{flex-direction:column}}</style></head><body><div class="wrap"><h1>LightBridge Frame Scanner</h1><p class="sub"><span id="loaded">Loading inventory…</span></p><div class="card"><button id="scanBtn" class="primary">📷 Scan Barcode</button><div id="readerWrap" class="hidden"><div id="reader"></div></div><div id="scanStatus" class="status">Use the number printed below the product barcode.</div></div><div class="card"><div class="label">MANUAL BARCODE LOOKUP</div><div class="row" style="margin-top:7px"><input id="manual" inputmode="numeric" placeholder="Scan or type barcode"><button id="lookupBtn" class="secondary">Find</button></div></div><div id="result" class="card hidden"><div id="foundState" class="brand"></div><div id="brand" class="brand"></div><div id="model" class="big"></div><div><span id="type" class="pill"></span><span id="color" class="pill"></span></div><div class="grid"><div class="metric"><div class="label">INVOICE UNIT PRICE</div><div id="cost" class="v">—</div></div><div class="metric"><div class="label">MSRP</div><div id="msrp" class="v">—</div></div><div class="metric"><div class="label">SCANNED</div><div id="qty" class="v">0</div></div></div><div id="formula" class="status"></div><div id="barcodeLine" class="status"></div><button id="addBtn" class="primary" style="margin-top:12px">Add to Physical Count</button></div><div class="card"><div class="scanhead"><div><div class="label">PHYSICAL COUNT</div><div class="big"><span id="totalScans">0</span> scans</div></div><div style="text-align:right"><div class="label">UNIQUE</div><div class="big" id="uniqueScans">0</div></div></div><div id="recent" class="status">No frames scanned yet.</div><div class="toolbar"><button id="exportBtn" class="secondary">⬇️ Export Count CSV</button><button id="clearBtn" class="danger">Clear Count</button></div></div></div><script>
+const DETAILS='data/lightbridge_safilo_inventory_with_frame_details.csv', PRICES='inventory.csv';let inventory=new Map(),current=null,scanner=null,running=false,count=JSON.parse(localStorage.getItem('lb-frame-count')||'{}');
+const clean=v=>String(v||'').replace(/[^0-9]/g,'').trim();
+function csv(t){let R=[],r=[],f='',q=false;for(let i=0;i<t.length;i++){let c=t[i],n=t[i+1];if(q){if(c==='"'&&n==='"'){f+='"';i++}else if(c==='"')q=false;else f+=c}else if(c==='"')q=true;else if(c===','){r.push(f);f=''}else if(c==='\n'){r.push(f.replace(/\r$/,''));R.push(r);r=[];f=''}else f+=c}if(f||r.length){r.push(f);R.push(r)}return R}
+async function load(){try{let [dr,pr]=await Promise.all([fetch(DETAILS+'?v='+Date.now()),fetch(PRICES+'?v='+Date.now())]);let D=csv(await dr.text()),P=csv(await pr.text()),dh=D.shift().map(x=>x.trim()),ph=P.shift().map(x=>x.trim()),di=n=>dh.indexOf(n),pi=n=>ph.indexOf(n);for(const a of D){let b=clean(a[di('Barcode Number')]);if(b)inventory.set(b,{barcode:b,brand:a[di('Brand')]||'',model:a[di('Frame Name')]||'',color:a[di('Color')]||'',type:a[di('Type')]||'',cost:'',msrp:''})}let validated=0;for(const a of P){let b=clean(a[pi('code')]);if(!b)continue;let x=inventory.get(b)||{barcode:b,brand:'',model:'',color:''};x.type=a[pi('category')]||x.type;x.cost=a[pi('unitPrice')]||'';let mult=Number(a[pi('multiplier')])||(x.type==='Sunglasses'?2.75:3);x.mult=mult;x.msrp=(Number(x.cost)*mult).toFixed(2);inventory.set(b,x);validated++}document.getElementById('loaded').textContent=validated+' price-validated items loaded · invoice Unit Price used';}catch(e){document.getElementById('loaded').textContent='Inventory could not load';document.getElementById('loaded').className='bad'}renderCount()}
+function show(x,b){current=x||{barcode:b,model:'Barcode not found'};let found=!!x;result.classList.remove('hidden');foundState.textContent=found?'✓ FOUND IN INVENTORY':'⚠ NOT FOUND IN INVENTORY';foundState.className='brand '+(found?'ok':'bad');brand.textContent=x?.brand||'';model.textContent=x?.model||'Barcode not found';type.textContent=x?.type||'Unknown';color.textContent=x?.color||'Color unavailable';cost.textContent=x?.cost?'$'+Number(x.cost).toFixed(2):'—';msrp.textContent=x?.msrp?'$'+Number(x.msrp).toFixed(2):'—';qty.textContent=count[b]?.qty||0;formula.textContent=x?.cost?('$'+Number(x.cost).toFixed(2)+' × '+Number(x.mult).toFixed(2)+' = $'+Number(x.msrp).toFixed(2)):'Price not validated';barcodeLine.textContent='Barcode: '+b;addBtn.textContent=found?'Add to Physical Count':'Add Unknown Barcode'}
+function lookup(v,add=false){let b=clean(v);if(!b)return;show(inventory.get(b),b);manual.value=b;if(add)addCurrent()}
+function addCurrent(){if(!current)return;let b=current.barcode;if(!count[b])count[b]={qty:0,brand:current.brand||'',model:current.model||'',color:current.color||'',type:current.type||'',cost:current.cost||'',msrp:current.msrp||''};count[b].qty++;localStorage.setItem('lb-frame-count',JSON.stringify(count));qty.textContent=count[b].qty;renderCount();if(navigator.vibrate)navigator.vibrate(70)}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function renderCount(){let E=Object.entries(count),t=E.reduce((s,[,v])=>s+Number(v.qty||0),0);totalScans.textContent=t;uniqueScans.textContent=E.length;recent.innerHTML=E.length?E.slice(-8).reverse().map(([b,v])=>`<div class="scanitem"><div class="scanhead"><b>${esc(v.brand+' '+v.model)||'Unknown'}</b><b>× ${v.qty}</b></div><div class="tiny">${b}${v.color?' · '+esc(v.color):''}</div></div>`).join(''):'No frames scanned yet.'}
+async function toggle(){if(running){try{await scanner.stop()}catch(e){}running=false;readerWrap.classList.add('hidden');scanBtn.textContent='📷 Scan Barcode';return}readerWrap.classList.remove('hidden');scanBtn.textContent='Stop Camera';scanner=new Html5Qrcode('reader');try{await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:280,height:150}},d=>{lookup(d,true);scanStatus.textContent='Scanned '+clean(d)+' — added to count.'},()=>{});running=true}catch(e){scanStatus.textContent='Camera could not start. Check Safari camera permission.';scanStatus.className='status bad';scanBtn.textContent='📷 Scan Barcode'}}
+function exportCSV(){let L=[['Barcode Number','Brand','Frame Name','Color','Type','Invoice Unit Price','MSRP Price','Physical Qty']];for(const[b,v]of Object.entries(count))L.push([b,v.brand,v.model,v.color,v.type,v.cost,v.msrp,v.qty]);let s=L.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/csv'}));a.download='lightbridge_physical_count.csv';a.click()}
+scanBtn.onclick=toggle;lookupBtn.onclick=()=>lookup(manual.value);manual.onkeydown=e=>{if(e.key==='Enter')lookup(e.target.value)};addBtn.onclick=addCurrent;exportBtn.onclick=exportCSV;clearBtn.onclick=()=>{if(confirm('Clear the entire physical count?')){count={};localStorage.removeItem('lb-frame-count');renderCount()}};load();
+</script></body></html>
