@@ -1,144 +1,207 @@
-"code","category","manufacturer","brand","model","unitPrice","multiplier","msrp","status"
-"716736443737","Eyeglass Frame","Safilo","","","133.0","3.0","399.0","Active"
-"716736747446","Eyeglass Frame","Safilo","","","133.0","3.0","399.0","Active"
-"716736983134","Eyeglass Frame","Safilo","","","106.0","3.0","318.0","Active"
-"197737130558","Eyeglass Frame","Safilo","","","138.0","3.0","414.0","Active"
-"197737282868","Eyeglass Frame","Safilo","","","133.0","3.0","399.0","Active"
-"197737262723","Eyeglass Frame","Safilo","","","122.0","3.0","366.0","Active"
-"197737262822","Eyeglass Frame","Safilo","","","122.0","3.0","366.0","Active"
-"716736747682","Eyeglass Frame","Safilo","","","106.0","3.0","318.0","Active"
-"197737048525","Eyeglass Frame","Safilo","","","126.0","3.0","378.0","Active"
-"197737074920","Eyeglass Frame","Safilo","","","130.0","3.0","390.0","Active"
-"197737074937","Eyeglass Frame","Safilo","","","130.0","3.0","390.0","Active"
-"197737067663","Eyeglass Frame","Safilo","","","119.0","3.0","357.0","Active"
-"197737127985","Eyeglass Frame","Safilo","","","111.0","3.0","333.0","Active"
-"197737132590","Eyeglass Frame","Safilo","","","106.0","3.0","318.0","Active"
-"197737132644","Eyeglass Frame","Safilo","","","119.0","3.0","357.0","Active"
-"197737211646","Eyeglass Frame","Safilo","","","118.0","3.0","354.0","Active"
-"197737212650","Eyeglass Frame","Safilo","","","114.0","3.0","342.0","Active"
-"197737208912","Eyeglass Frame","Safilo","","","132.0","3.0","396.0","Active"
-"197737263362","Eyeglass Frame","Safilo","","","86.0","3.0","258.0","Active"
-"197737257934","Eyeglass Frame","Safilo","","","111.0","3.0","333.0","Active"
-"197737258207","Eyeglass Frame","Safilo","","","96.0","3.0","288.0","Active"
-"0197737219420","Eyeglass Frame","Safilo","","","93.95","3.0","281.85","Active"
-"0197737219383","Eyeglass Frame","Safilo","","","93.95","3.0","281.85","Active"
-"0197737274528","Eyeglass Frame","Safilo","","","86.95","3.0","260.85","Active"
-"0197737283728","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0197737025717","Eyeglass Frame","Safilo","","","95.95","3.0","287.85","Active"
-"0197737284503","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0716736923277","Eyeglass Frame","Safilo","","","95.95","3.0","287.85","Active"
-"0197737273903","Eyeglass Frame","Safilo","","","74.95","3.0","224.85000000000002","Active"
-"0197737179984","Eyeglass Frame","Safilo","","","104.0","3.0","312.0","Active"
-"0197737341701","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0197737273989","Eyeglass Frame","Safilo","","","82.95","3.0","248.85000000000002","Active"
-"0197737274030","Eyeglass Frame","Safilo","","","82.95","3.0","248.85000000000002","Active"
-"0197737274245","Eyeglass Frame","Safilo","","","78.95","3.0","236.85000000000002","Active"
-"0197737211240","Eyeglass Frame","Safilo","","","96.0","3.0","288.0","Active"
-"0197737140588","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0197737377908","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0197737179939","Eyeglass Frame","Safilo","","","93.95","3.0","281.85","Active"
-"0197737182878","Eyeglass Frame","Safilo","","","78.0","3.0","234.0","Active"
-"0197737140632","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0197737217631","Eyeglass Frame","Safilo","","","87.95","3.0","263.85","Active"
-"0197737341749","Eyeglass Frame","Safilo","","","74.95","3.0","224.85000000000002","Active"
-"0197737274313","Eyeglass Frame","Safilo","","","82.95","3.0","248.85000000000002","Active"
-"0197737341893","Eyeglass Frame","Safilo","","","62.0","3.0","186.0","Active"
-"0197737274382","Eyeglass Frame","Safilo","","","94.95","3.0","284.85","Active"
-"0197737341817","Eyeglass Frame","Safilo","","","122.0","3.0","366.0","Active"
-"0197737211080","Eyeglass Frame","Safilo","","","78.0","3.0","234.0","Active"
-"0197737341848","Eyeglass Frame","Safilo","","","60.0","3.0","180.0","Active"
-"0197737075682","Eyeglass Frame","Safilo","","","89.95","3.0","269.85","Active"
-"0197737024512","Eyeglass Frame","Safilo","","","98.95","3.0","296.85","Active"
-"0197737274542","Eyeglass Frame","Safilo","","","86.95","3.0","260.85","Active"
-"197737249861","Eyeglass Frame","Safilo","","","98.5","3.0","295.5","Active"
-"197737026059","Eyeglass Frame","Safilo","","","83.5","3.0","250.5","Active"
-"716736995892","Eyeglass Frame","Safilo","","","83.5","3.0","250.5","Active"
-"716736320403","Eyeglass Frame","Safilo","","","90.5","3.0","271.5","Active"
-"716736320465","Eyeglass Frame","Safilo","","","90.5","3.0","271.5","Active"
-"716736336794","Eyeglass Frame","Safilo","","","84.5","3.0","253.5","Active"
-"197737129088","Eyeglass Frame","Safilo","","","84.5","3.0","253.5","Active"
-"716736336800","Eyeglass Frame","Safilo","","","90.5","3.0","271.5","Active"
-"716736995847","Eyeglass Frame","Safilo","","","90.6","3.0","271.79999999999995","Active"
-"716736980423","Eyeglass Frame","Safilo","","","95.0","3.0","285.0","Active"
-"197737060879","Eyeglass Frame","Safilo","","","90.5","3.0","271.5","Active"
-"197737081294","Eyeglass Frame","Safilo","","","90.5","3.0","271.5","Active"
-"197737115784","Eyeglass Frame","Safilo","","","90.5","3.0","271.5","Active"
-"197737115883","Eyeglass Frame","Safilo","","","90.5","3.0","271.5","Active"
-"197737207939","Eyeglass Frame","Safilo","","","84.0","3.0","252.0","Active"
-"197737208042","Eyeglass Frame","Safilo","","","74.0","3.0","222.0","Active"
-"197737205553","Eyeglass Frame","Safilo","","","82.0","3.0","246.0","Active"
-"197737205607","Eyeglass Frame","Safilo","","","84.0","3.0","252.0","Active"
-"197737207991","Eyeglass Frame","Safilo","","","78.0","3.0","234.0","Active"
-"197737337131","Eyeglass Frame","Safilo","","","94.5","3.0","283.5","Active"
-"197737238421","Eyeglass Frame","Safilo","","","83.5","3.0","250.5","Active"
-"197737238452","Eyeglass Frame","Safilo","","","81.5","3.0","244.5","Active"
-"197737280826","Eyeglass Frame","Safilo","","","104.0","3.0","312.0","Active"
-"0197737030926","Eyeglass Frame","Safilo","","","76.95","3.0","230.85000000000002","Active"
-"0716736294483","Eyeglass Frame","Safilo","","","72.95","3.0","218.85000000000002","Active"
-"0716736294520","Eyeglass Frame","Safilo","","","72.95","3.0","218.85000000000002","Active"
-"0197737285159","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0197737285180","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0716736795300","Eyeglass Frame","Safilo","","","53.95","3.0","161.85000000000002","Active"
-"0716736795317","Eyeglass Frame","Safilo","","","53.95","3.0","161.85000000000002","Active"
-"0197737211455","Eyeglass Frame","Safilo","","","76.95","3.0","230.85000000000002","Active"
-"0716736973821","Eyeglass Frame","Safilo","","","72.95","3.0","218.85000000000002","Active"
-"0716736973883","Eyeglass Frame","Safilo","","","72.95","3.0","218.85000000000002","Active"
-"0716736973890","Eyeglass Frame","Safilo","","","72.95","3.0","218.85000000000002","Active"
-"0197737004781","Eyeglass Frame","Safilo","","","55.95","3.0","167.85000000000002","Active"
-"0197737069148","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0197737053734","Eyeglass Frame","Safilo","","","85.95","3.0","257.85","Active"
-"0197737053437","Eyeglass Frame","Safilo","","","76.95","3.0","230.85000000000002","Active"
-"0197737053499","Eyeglass Frame","Safilo","","","72.95","3.0","218.85000000000002","Active"
-"0197737076016","Eyeglass Frame","Safilo","","","87.95","3.0","263.85","Active"
-"0197737075927","Eyeglass Frame","Safilo","","","85.95","3.0","257.85","Active"
-"0197737075972","Eyeglass Frame","Safilo","","","85.95","3.0","257.85","Active"
-"0197737075910","Eyeglass Frame","Safilo","","","87.95","3.0","263.85","Active"
-"0197737122263","Eyeglass Frame","Safilo","","","78.95","3.0","236.85000000000002","Active"
-"0197737122270","Eyeglass Frame","Safilo","","","78.95","3.0","236.85000000000002","Active"
-"0197737100070","Eyeglass Frame","Safilo","","","91.95","3.0","275.85","Active"
-"0197737100162","Eyeglass Frame","Safilo","","","89.95","3.0","269.85","Active"
-"0197737099107","Eyeglass Frame","Safilo","","","72.95","3.0","218.85000000000002","Active"
-"0197737099145","Eyeglass Frame","Safilo","","","72.95","3.0","218.85000000000002","Active"
-"0197737099213","Eyeglass Frame","Safilo","","","70.95","3.0","212.85000000000002","Active"
-"0197737170998","Eyeglass Frame","Safilo","","","46.0","3.0","138.0","Active"
-"0197737170110","Eyeglass Frame","Safilo","","","82.5","3.0","247.5","Active"
-"0197737170127","Eyeglass Frame","Safilo","","","82.5","3.0","247.5","Active"
-"0197737195953","Eyeglass Frame","Safilo","","","76.0","3.0","228.0","Active"
-"0197737195977","Eyeglass Frame","Safilo","","","76.0","3.0","228.0","Active"
-"0197737195984","Eyeglass Frame","Safilo","","","72.0","3.0","216.0","Active"
-"0197737196011","Eyeglass Frame","Safilo","","","72.0","3.0","216.0","Active"
-"0197737271251","Eyeglass Frame","Safilo","","","85.0","3.0","255.0","Active"
-"0197737283087","Eyeglass Frame","Safilo","","","76.95","3.0","230.85000000000002","Active"
-"716736922171","Sunglasses","Safilo","","","102.0","2.75","280.5","Active"
-"197737062736","Sunglasses","Safilo","","","149.0","2.75","409.75","Active"
-"197737075200","Sunglasses","Safilo","","","122.0","2.75","335.5","Active"
-"197737121709","Sunglasses","Safilo","","","144.0","2.75","396.0","Active"
-"197737262563","Sunglasses","Safilo","","","122.0","2.75","335.5","Active"
-"197737262532","Sunglasses","Safilo","","","122.0","2.75","335.5","Active"
-"0197737142162","Sunglasses","Safilo","","","90.0","2.75","247.5","Active"
-"0197737274962","Sunglasses","Safilo","","","78.0","2.75","214.5","Active"
-"0197737284824","Sunglasses","Safilo","","","90.0","2.75","247.5","Active"
-"0197737274665","Sunglasses","Safilo","","","69.0","2.75","189.75","Active"
-"0197737274740","Sunglasses","Safilo","","","95.0","2.75","261.25","Active"
-"0197737274764","Sunglasses","Safilo","","","71.0","2.75","195.25","Active"
-"0197737141455","Sunglasses","Safilo","","","90.0","2.75","247.5","Active"
-"0197737182632","Sunglasses","Safilo","","","95.0","2.75","261.25","Active"
-"0197737213138","Sunglasses","Safilo","","","82.0","2.75","225.5","Active"
-"0197737342128","Sunglasses","Safilo","","","62.0","2.75","170.5","Active"
-"0197737342180","Sunglasses","Safilo","","","77.0","2.75","211.75","Active"
-"0716736924052","Sunglasses","Safilo","","","90.0","2.75","247.5","Active"
-"716736095394","Sunglasses","Safilo","","","55.6","2.75","152.9","Active"
-"197737129576","Sunglasses","Safilo","","","87.0","2.75","239.25","Active"
-"197737208158","Sunglasses","Safilo","","","90.0","2.75","247.5","Active"
-"197737243999","Sunglasses","Safilo","","","86.0","2.75","236.5","Active"
-"197737244026","Sunglasses","Safilo","","","86.0","2.75","236.5","Active"
-"197737243920","Sunglasses","Safilo","","","78.0","2.75","214.5","Active"
-"197737244040","Sunglasses","Safilo","","","83.0","2.75","228.25","Active"
-"197737235178","Sunglasses","Safilo","","","90.0","2.75","247.5","Active"
-"0716736847368","Sunglasses","Safilo","","","79.0","2.75","217.25","Active"
-"0716736973791","Sunglasses","Safilo","","","68.0","2.75","187.0","Active"
-"0716736989648","Sunglasses","Safilo","","","70.0","2.75","192.5","Active"
-"0197737072117","Sunglasses","Safilo","","","79.0","2.75","217.25","Active"
-"0197737099442","Sunglasses","Safilo","","","81.0","2.75","222.75","Active"
-"0197737246242","Sunglasses","Safilo","","","92.0","2.75","253.0","Active"
-"0197737246310","Sunglasses","Safilo","","","88.0","2.75","242.0","Active"
+Barcode Number,Brand,Model,Color,Type,Invoice Unit Price,MSRP Price,Source
+716736995847,Marc Jacobs,MARC 513,7HH GREY PINK,Frame,90.50,271.50,invoice 2/17
+716736336800,Marc Jacobs,MARC 513,789 LILAC,Frame,90.50,271.50,invoice 2/17
+197737129088,Marc Jacobs,MARC 511/F,789 LILAC,Frame,84.50,253.50,invoice 2/17
+716736336794,Marc Jacobs,MARC 511,789 LILAC,Frame,84.50,253.50,invoice 2/17
+716736320465,Marc Jacobs,MARC 510,KB7 GREY,Frame,90.50,271.50,invoice 2/17
+716736320403,Marc Jacobs,MARC 510,086 HVN,Frame,90.50,271.50,invoice 2/17
+716736995892,Marc Jacobs,MARC 464,FWM NUDE,Frame,83.50,250.50,invoice 2/17
+197737026059,Marc Jacobs,MARC 462/F,09Q BROWN,Frame,83.50,250.50,invoice 2/17
+197737249878,Marc Jacobs,MARC 400,CVT TEAL HVN,Frame,98.50,295.50,invoice 3/17
+197737249861,Marc Jacobs,MARC 400,ATK HVN PTT GR,Frame,98.50,295.50,invoice 3/17
+716736095394,Marc Jacobs,MARC 336/S,807 BLACK,Sunglasses,55.50,152.63,invoice 3/17
+197737262822,BOSS,BOSS 1924/G/U,2M2 BLK GOLD,Frame,122.00,366.00,invoice 3/17
+197737262723,BOSS,BOSS 1922/G/U,807 BLACK,Frame,122.00,366.00,invoice 3/17
+197737255800,BOSS,BOSS 1888/G/S,2M2 BLK GOLD,Sunglasses,112.00,308.00,invoice 4/17
+197737255220,BOSS,BOSS 1884/G,PJP BLUE,Frame,88.00,264.00,invoice 4/17
+197737255190,BOSS,BOSS 1884/G,KB7 GREY,Frame,88.00,264.00,invoice 4/17
+197737255084,BOSS,BOSS 1882/G/C,08A BLACKGREY,Frame,115.50,346.50,invoice 4/17
+197737255282,BOSS,BOSS 1880/G/S,807 BLACK,Sunglasses,90.00,247.50,invoice 4/17
+197737199647,BOSS,BOSS 1876/F,J5G GOLD,Frame,110.00,330.00,invoice 4/17
+197737208486,BOSS,BOSS 1858/G/U,086 HVN,Frame,120.00,360.00,invoice 4/17
+716736980522,Marc Jacobs,MARC 741,06J GOLD,Frame,98.50,295.50,invoice 4/17
+197737209230,Marc Jacobs,MJ 1132/G,086 HVN,Frame,84.00,252.00,invoice 5/17
+197737205485,Marc Jacobs,MJ 1129,X8Q BW BLU HV,Frame,98.00,294.00,invoice 5/17
+197737202645,Marc Jacobs,MJ 1127/G/S,D1U BWGREENHVN,Sunglasses,97.00,266.75,invoice 5/17
+197737130770,Marc Jacobs,MJ 1123,IWF HRNBRWBLU,Frame,95.00,285.00,invoice 5/17
+197737130886,Marc Jacobs,MJ 1119/S,807 BLACK,Sunglasses,100.00,275.00,invoice 5/17
+716736976761,Marc Jacobs,MJ 1107,YQL GREYBEIGE,Frame,100.00,300.00,invoice 5/17
+197737026271,Marc Jacobs,MJ 1096/F,1ED GREEN,Frame,98.50,295.50,invoice 5/17
+716736858760,Marc Jacobs,MJ 1096,LHF BURGUNDY,Frame,98.50,295.50,invoice 5/17
+197737280826,Marc Jacobs,MARC 915,6AK GREEN HRN,Frame,104.00,312.00,invoice 6/17
+197737235178,Marc Jacobs,MARC 906/S,8SO MT GD HVN,Sunglasses,90.00,247.50,invoice 6/17
+197737238452,Marc Jacobs,MARC 900/G,FWM NUDE,Frame,81.50,244.50,invoice 6/17
+197737238421,Marc Jacobs,MARC 899/G,MVU AZURE,Frame,83.50,250.50,invoice 6/17
+197737337131,Marc Jacobs,MARC 893/US,CVT TEAL HVN,Frame,94.50,283.50,invoice 6/17
+197737244040,Marc Jacobs,MARC 885/S,3Y5 KHAKI,Sunglasses,83.00,228.25,invoice 6/17
+197737243920,Marc Jacobs,MARC 884/S,807 BLACK,Sunglasses,78.00,214.50,invoice 6/17
+197737244026,Marc Jacobs,MARC 883/S,JWJ GRN BW,Sunglasses,86.00,236.50,invoice 6/17
+197737243999,Marc Jacobs,MARC 883/S,0B0 BW PNKHVN,Sunglasses,86.00,236.50,invoice 7/17
+197737207991,Marc Jacobs,MARC 872/G,ZX9 BLUE AZUR,Frame,78.00,234.00,invoice 7/17
+197737205607,Marc Jacobs,MARC 870/G,JU2 GOLD BRONZ,Frame,84.00,252.00,invoice 7/17
+197737205553,Marc Jacobs,MARC 862,FWM NUDE,Frame,82.00,246.00,invoice 7/17
+197737208042,Marc Jacobs,MARC 857,80S BLACK WHTE,Frame,74.00,222.00,invoice 7/17
+197737207939,Marc Jacobs,MARC 855,80S BLACK WHTE,Frame,84.00,252.00,invoice 7/17
+197737208158,Marc Jacobs,MARC 851/S,WR7 BLK HAVAN,Sunglasses,90.00,247.50,invoice 7/17
+197737115883,Marc Jacobs,MARC 836,807 BLACK,Frame,90.50,271.50,invoice 7/17
+197737115784,Marc Jacobs,MARC 833,789 LILAC,Frame,90.50,271.50,invoice 8/17
+197737129576,Marc Jacobs,MARC 815/S,807 BLACK,Sunglasses,87.00,239.25,invoice 8/17
+197737081294,Marc Jacobs,MARC 779/F,KB7 GREY,Frame,90.50,271.50,invoice 8/17
+197737060879,Marc Jacobs,MARC 779,OMY BRW CARML,Frame,90.50,271.50,invoice 8/17
+197737081256,Marc Jacobs,MARC 768/F,LHF BURGUNDY,Frame,84.50,253.50,invoice 8/17
+716736980423,Marc Jacobs,MARC 754,KB7 GREY,Frame,95.00,285.00,invoice 8/17
+197737211646,Carolina Herrera,HER 0331,086 HVN,Frame,118.00,354.00,invoice 8/17
+197737132644,Carolina Herrera,HER 0321,RHL GOLD BLCK,Frame,119.00,357.00,invoice 8/17
+197737132590,Carolina Herrera,HER 0316,1ED GREEN,Frame,119.00,357.00,invoice 9/17
+197737128173,Carolina Herrera,HER 0311,0T7 PLUM,Frame,106.00,318.00,invoice 9/17
+197737127985,Carolina Herrera,HER 0304,086 HVN,Frame,111.00,333.00,invoice 9/17
+197737121877,Carolina Herrera,HER 0293,0IU STRIPED BL,Frame,99.00,297.00,invoice 9/17
+197737121709,Carolina Herrera,HER 0285/G/S,086 HVN,Sunglasses,144.00,396.00,invoice 9/17
+197737074777,Carolina Herrera,HER 0280,35J PINK,Frame,99.00,297.00,invoice 9/17
+197737072407,Carolina Herrera,HER 0274,807 BLACK,Frame,104.00,312.00,invoice 9/17
+197737072582,Carolina Herrera,HER 0273/S,09Q BROWN,Sunglasses,102.00,280.50,invoice 9/17
+197737073138,Carolina Herrera,HER 0266,0T7 PLUM,Frame,111.00,333.00,invoice 10/17
+197737074326,Carolina Herrera,HER 0263,2M0 SHD GREY,Frame,126.00,378.00,invoice 10/17
+197737075033,Carolina Herrera,HER 0260/G,807 BLACK,Frame,111.00,333.00,invoice 10/17
+197737075026,Carolina Herrera,HER 0260/G,086 HVN,Frame,111.00,333.00,invoice 10/17
+197737074937,Carolina Herrera,HER 0259/CS,807 BLACK,Sunglasses,130.00,357.50,invoice 10/17
+197737074920,Carolina Herrera,HER 0259/CS,086 HVN,Sunglasses,130.00,357.50,invoice 10/17
+197737075200,Carolina Herrera,HER 0258/G/S,086 HVN,Sunglasses,122.00,335.50,invoice 10/17
+197737067663,Carolina Herrera,HER 0267,1ED GREEN,Frame,119.00,357.00,invoice 10/17
+197737062736,Carolina Herrera,HER 0255/S,807 BLACK,Sunglasses,149.00,409.75,invoice 11/17
+716736982281,Carolina Herrera,HER 0252,807 BLACK,Frame,98.00,294.00,invoice 11/17
+716736991566,Carolina Herrera,HER 0239,063 HAVAN RED,Frame,104.00,312.00,invoice 11/17
+716736984520,Carolina Herrera,HER 0232,FWM NUDE,Frame,111.00,333.00,invoice 11/17
+716736868455,Carolina Herrera,HER 0201,2M2 BLK GOLD,Frame,129.00,387.00,invoice 11/17
+716736922171,Carolina Herrera,HER 0176/G/S,KDX BLACKNUDE,Sunglasses,102.00,280.50,invoice 11/17
+716736921372,Carolina Herrera,HER 0174,2IK HVNA GOLD,Frame,129.00,387.00,invoice 11/17
+716736801179,Carolina Herrera,HER 0167,WR7 BLK,Frame,99.00,297.00,invoice 11/17
+716736801544,Carolina Herrera,HER 0162,LKS GOLD BLUE,Frame,106.00,318.00,invoice 12/17
+197737048525,Carolina Herrera,HER 0152,HAQ SHD GRY PK,Frame,126.00,378.00,invoice 12/17
+716736747682,Carolina Herrera,HER 0097,XGW GREENHAVA,Frame,106.00,318.00,invoice 12/17
+716736719962,Carolina Herrera,CH 0027,IPR HAV BLUE H,Frame,111.00,333.00,invoice 12/17
+197737211660,Carolina Herrera,HER 0331,6CR SAGE,Frame,118.00,354.00,invoice 12/17
+197737208578,BOSS,BOSS 1856/G/U,003 MTT BLACK,Frame,120.00,360.00,invoice 12/17
+197737198176,BOSS,BOSS 1833,2W8 GREY HORN,Frame,95.00,285.00,invoice 12/17
+197737138745,BOSS,BOSS 1805,KB7 GREY,Frame,68.00,204.00,invoice 12/17
+197737282868,BOSS,BOSS 1802/F/US,I46 MT BK GD,Frame,133.00,399.00,invoice 13/17
+197737132163,BOSS,BOSS 1801/F,FX8 GRY PALL,Frame,112.00,336.00,invoice 13/17
+197737130558,BOSS,BOSS 1776/G/U,FT3 GREY GOLD,Frame,138.00,414.00,invoice 13/17
+716736983134,BOSS,BOSS 1670/F,1ED GREEN,Frame,106.00,318.00,invoice 13/17
+716736747446,BOSS,BOSS 1478/F,PJP BLUE,Frame,133.00,399.00,invoice 13/17
+716736240435,BOSS,BOSS 1150/CS,003 MTT BLACK,Sunglasses,136.00,374.00,invoice 13/17
+716736443737,BOSS,BOSS 0680/IT,ZX9 BLUE AZUR,Frame,133.00,399.00,invoice 13/17
+197737264024,Carolina Herrera,HER 0400/G,0GA GOLD TEAL,Frame,130.00,390.00,invoice 14/17
+197737257996,Carolina Herrera,HER 0398,BSU VIOL GOLD,Frame,115.00,345.00,invoice 14/17
+197737257934,Carolina Herrera,HER 0396,807 BLACK,Frame,111.00,333.00,invoice 14/17
+197737257880,Carolina Herrera,HER 0395/G,7FF VLT HRN,Frame,111.00,333.00,invoice 14/17
+197737258030,Carolina Herrera,HER 0394/G/S,FWM NUDE,Sunglasses,149.00,409.75,invoice 14/17
+197737263041,Carolina Herrera,HER 0393,0T7 PLUM,Frame,82.00,246.00,invoice 14/17
+197737263362,Carolina Herrera,HER 0387,789 LILAC,Frame,86.00,258.00,invoice 14/17
+197737258184,Carolina Herrera,HER 0382,FWM NUDE,Frame,100.00,300.00,invoice 14/17
+197737258207,Carolina Herrera,HER 0381/G,381 BLUE HORN,Frame,96.00,288.00,invoice 15/17
+197737258191,Carolina Herrera,HER 0381/G,086 HVN,Frame,96.00,288.00,invoice 15/17
+197737262532,Carolina Herrera,HER 0374/S,80S BLACK WHITE,Sunglasses,122.00,335.50,invoice 15/17
+197737262563,Carolina Herrera,HER 0373/S,OWM BLACKBEIG,Sunglasses,122.00,335.50,invoice 15/17
+197737258412,Carolina Herrera,HER 0368,PJP BLUE,Frame,115.00,345.00,invoice 15/17
+197737258406,Carolina Herrera,HER 0368,807 BLACK,Frame,115.00,345.00,invoice 15/17
+197737208912,Carolina Herrera,HER 0357,LKS GOLD BLUE,Frame,132.00,396.00,invoice 15/17
+197737208882,Carolina Herrera,HER 0356/G,1ED GREEN,Frame,124.00,372.00,invoice 15/17
+197737212650,Carolina Herrera,HER 0355,DDB GOLD COPP,Frame,114.00,342.00,invoice 16/17
+197737212599,Carolina Herrera,HER 0353,9E1 BLK SHD CO,Frame,110.00,330.00,invoice 16/17
+197737208783,Carolina Herrera,HER 0334/C,807 BLACK,Frame,126.50,379.50,invoice 16/17
+0197737030926,Tommy Hilfiger,TH 1737/F,1ED,Frame,76.95,230.85,packing 1/11
+0716736294483,Tommy Hilfiger,TH 1785,003,Frame,72.95,218.85,packing 1/11
+0716736294520,Tommy Hilfiger,TH 1785,FLL,Frame,72.95,218.85,packing 1/11
+0716736795300,Tommy Hilfiger,TH 2025,003,Frame,53.95,161.85,packing 1/11
+0716736795317,Tommy Hilfiger,TH 2025,09Q,Frame,53.95,161.85,packing 1/11
+0197737211455,Tommy Hilfiger,TH 2041,T17,Frame,76.95,230.85,packing 1/11
+0716736923277,Kate Spade,KATTALIN/F,C9A,Frame,95.95,287.85,packing 1/11
+0716736973883,Tommy Hilfiger,TH 2076,1ED,Frame,72.95,218.85,packing 1/11
+0716736973890,Tommy Hilfiger,TH 2076,807,Frame,72.95,218.85,packing 1/11
+0716736973821,Tommy Hilfiger,TH 2075,KB7,Frame,72.95,218.85,packing 1/11
+0197737024512,Kate Spade,POSI,086,Frame,98.95,296.85,packing 2/11
+0197737025717,Kate Spade,JERI/F,1ED,Frame,95.95,287.85,packing 2/11
+0197737004781,Tommy Hilfiger,TH 2122,PJP,Frame,55.95,167.85,packing 2/11
+0197737053437,Tommy Hilfiger,TH 2147,807,Frame,76.95,230.85,packing 2/11
+0197737053499,Tommy Hilfiger,TH 2148,08A,Frame,72.95,218.85,packing 2/11
+0197737069148,Tommy Hilfiger,TH 2140,R80,Frame,91.95,275.85,packing 2/11
+0197737076016,Tommy Hilfiger,TH 2169,R81,Frame,87.95,263.85,packing 2/11
+0197737075910,Tommy Hilfiger,TH 2172,AOZ,Frame,87.95,263.85,packing 2/11
+0197737075927,Tommy Hilfiger,TH 2171,08A,Frame,85.95,257.85,packing 2/11
+0197737075972,Tommy Hilfiger,TH 2171,PJP,Frame,85.95,257.85,packing 2/11
+0197737075682,Kate Spade,KS TEYA,1ED,Frame,89.95,269.85,packing 3/11
+0197737099107,Tommy Hilfiger,TH 2204,09V,Frame,72.95,218.85,packing 3/11
+0197737099145,Tommy Hilfiger,TH 2204,D51,Frame,72.95,218.85,packing 3/11
+0197737099213,Tommy Hilfiger,TH 2206,8YW,Frame,70.95,212.85,packing 3/11
+0197737122263,Tommy Hilfiger,TH 2189,086,Frame,78.95,236.85,packing 3/11
+0197737122270,Tommy Hilfiger,TH 2189,1ED,Frame,78.95,236.85,packing 3/11
+0197737100070,Tommy Hilfiger,TH 2197,003,Frame,91.95,275.85,packing 3/11
+0197737100162,Tommy Hilfiger,TH 2198,3U5,Frame,89.95,269.85,packing 3/11
+0197737140588,Kate Spade,KS JACKELINE 2,PJP,Frame,91.95,275.85,packing 3/11
+0197737140632,Kate Spade,KS JOSHANN 2,807,Frame,91.95,275.85,packing 3/11
+0197737170998,Tommy Hilfiger,TH 2247,KB7,Frame,46.00,138.00,packing 4/11
+0197737170110,Tommy Hilfiger,TH 2248,AOZ,Frame,82.50,247.50,packing 4/11
+0197737170127,Tommy Hilfiger,TH 2248,R80,Frame,82.50,247.50,packing 4/11
+0197737182878,Kate Spade,KS JALINDA 2,807,Frame,78.00,234.00,packing 4/11
+0197737179939,Kate Spade,KS JAILY N 2/G,97M,Frame,93.95,281.85,packing 4/11
+0197737179984,Kate Spade,KS AYLIN 2/G/T,B3V,Frame,104.00,312.00,packing 4/11
+0197737195953,Tommy Hilfiger,TH 2278,003,Frame,76.00,228.00,packing 4/11
+0197737195977,Tommy Hilfiger,TH 2278,R80,Frame,76.00,228.00,packing 4/11
+0197737195984,Tommy Hilfiger,TH 2279,08A,Frame,72.00,216.00,packing 4/11
+0197737196011,Tommy Hilfiger,TH 2279,1ED,Frame,72.00,216.00,packing 4/11
+0197737211080,Kate Spade,KS REILLY 2,35J,Frame,78.00,234.00,packing 5/11
+0197737217631,Kate Spade,KS KARIANE 2,7RM,Frame,87.95,263.85,packing 5/11
+0197737211240,Kate Spade,KS HERMIONE 2,KB7,Frame,96.00,288.00,packing 5/11
+0197737219420,Kate Spade,ADRIE/3,IPR,Frame,93.95,281.85,packing 5/11
+0197737219383,Kate Spade,BRONWEN/3,QFO,Frame,93.95,281.85,packing 5/11
+0197737273903,Kate Spade,KS ADRIA 2,D51,Frame,74.95,224.85,packing 5/11
+0197737273989,Kate Spade,KS DEMI 2,3DV,Frame,82.95,248.85,packing 5/11
+0197737274030,Kate Spade,KS DEMI 2,PJP,Frame,82.95,248.85,packing 5/11
+0197737274245,Kate Spade,KS GENE 2/G,09Q,Frame,78.95,236.85,packing 5/11
+0197737274313,Kate Spade,KS LYSSA 2/G,09Q,Frame,82.95,248.85,packing 5/11
+0197737274382,Kate Spade,KS MISA 2/G,P6J,Frame,94.95,284.85,packing 6/11
+0197737274528,Kate Spade,CELESTINE/F,HKZ,Frame,86.95,260.85,packing 6/11
+0197737274542,Kate Spade,POSI/F,807,Frame,86.95,260.85,packing 6/11
+0197737271251,Tommy Hilfiger,TH 2297/F/US,5UV,Frame,85.00,255.00,packing 6/11
+0197737283087,Tommy Hilfiger,TH 2373,EX4,Frame,76.95,230.85,packing 6/11
+0197737285159,Tommy Hilfiger,TH 1918/US,003,Frame,91.95,275.85,packing 6/11
+0197737285180,Tommy Hilfiger,TH 1918/US,FLL,Frame,91.95,275.85,packing 6/11
+0197737283728,Kate Spade,HERMIONE/G/US,807,Frame,91.95,275.85,packing 6/11
+0197737284503,Kate Spade,JOLIET/US,7HH,Frame,91.95,275.85,packing 6/11
+0197737299514,Kate Spade,KS CAROLAN2G/US,CUA,Frame,91.95,275.85,packing 6/11
+0197737295288,Kate Spade,WANDA/F/US,807,Frame,78.95,236.85,packing 7/11
+0197737295301,Kate Spade,WANDA/F/US,YQL,Frame,78.95,236.85,packing 7/11
+0197737298326,Tommy Hilfiger,TH 1905/US,003,Frame,85.95,257.85,packing 7/11
+0197737298340,Tommy Hilfiger,TH 1905/US,FLL,Frame,85.95,257.85,packing 7/11
+0197737324896,Tommy Hilfiger,TH 2316/US,003,Frame,91.95,275.85,packing 7/11
+0197737325053,Tommy Hilfiger,TH 2313/US,003,Frame,97.95,293.85,packing 7/11
+0197737325060,Tommy Hilfiger,TH 2313/US,0J1,Frame,97.95,293.85,packing 7/11
+0197737341329,Kate Spade,KS LUCYANN 4/G,6QS,Frame,82.95,248.85,packing 7/11
+0197737341350,Kate Spade,KS LUCYANN 4/G,807,Frame,82.95,248.85,packing 7/11
+0197737341701,Kate Spade,KS KARLY 2,6QS,Frame,74.95,224.85,packing 7/11
+0197737341749,Kate Spade,KS KARLY 2,S9W,Frame,74.95,224.85,packing 8/11
+0197737341817,Kate Spade,KS RAGAN 2/C2,807,Frame,122.00,366.00,packing 8/11
+0197737341848,Kate Spade,KS TANYA 2,141,Frame,60.00,180.00,packing 8/11
+0197737341893,Kate Spade,KS MARIKA 2,0B2,Frame,62.00,186.00,packing 8/11
+0197737377908,Kate Spade,KS JACKELINE2US,7ZJ,Frame,91.95,275.85,packing 8/11
+0716736847368,Tommy Hilfiger,TH 2040/S,T17,Sunglasses,79.00,217.25,packing 8/11
+0716736924052,Kate Spade,MARLOWE/G/S,HR3,Sunglasses,90.00,247.50,packing 8/11
+0716736973791,Tommy Hilfiger,TH 2073/S,PJP,Sunglasses,68.00,187.00,packing 8/11
+0716736989648,Tommy Hilfiger,TH 2088/S,FLL,Sunglasses,70.00,192.50,packing 8/11
+0197737053734,Tommy Hilfiger,TH 2145/CS,08A,Frame,85.95,257.85,packing 8/11
+0197737072117,Tommy Hilfiger,TH 2126/S,086,Sunglasses,79.00,217.25,packing 9/11
+0197737099442,Tommy Hilfiger,TH 2201/S,807,Sunglasses,81.00,222.75,packing 9/11
+0197737142162,Kate Spade,AMBERLEE/F/S,5MU,Sunglasses,90.00,247.50,packing 9/11
+0197737141455,Kate Spade,KS JACEY 2/G/S,807,Sunglasses,90.00,247.50,packing 9/11
+0197737182632,Kate Spade,KS JENELL 2/S,807,Sunglasses,95.00,261.25,packing 9/11
+0197737213138,Kate Spade,KS LAYNE 2/G/S,7RM,Sunglasses,82.00,225.50,packing 9/11
+0197737246242,Tommy Hilfiger,TH 2319/S,807,Sunglasses,92.00,253.00,packing 9/11
+0197737246310,Tommy Hilfiger,TH 2324/S,807,Sunglasses,88.00,242.00,packing 9/11
+0197737274665,Kate Spade,KS AILEY 2/G/S,807,Sunglasses,69.00,189.75,packing 9/11
+0197737274740,Kate Spade,KS AMAYA 2/G/S,INA,Sunglasses,95.00,261.25,packing 9/11
+0197737274764,Kate Spade,KS BERYL 2/G/S,086,Sunglasses,71.00,195.25,packing 10/11
+0197737274962,Kate Spade,CAMRYN/F/S,X19,Sunglasses,78.00,214.50,packing 10/11
+0197737284824,Kate Spade,CAMRYN/S/US,086,Sunglasses,90.00,247.50,packing 10/11
+0197737342128,Kate Spade,KS MELLY 2/G/S,LKS,Sunglasses,62.00,170.50,packing 10/11
+0197737342180,Kate Spade,KS TAYLA 2/S,086,Sunglasses,77.00,211.75,packing 10/11
